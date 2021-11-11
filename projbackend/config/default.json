@@ -1,4 +1,0 @@
-{
-  "mongoURI": "mongodb+srv://Neha123:neha123@dev-connector-cluster.zcb4e.mongodb.net/Dev-Connector-Cluster?retryWrites=true&w=majority",
-  "SECRET_KEY": "HGSFTD"
-}
