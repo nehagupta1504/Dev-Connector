@@ -26,7 +26,10 @@ router.get("/", auth, async (req, res) => {
 // @access Public
 router.post(
   "/",
-  [check("email").isEmail(), check("password").not().isEmpty()],
+  [
+    check("email", "Please Enter a valid email").isEmail(),
+    check("password", "Please Enter Password").not().isEmpty(),
+  ],
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -50,7 +53,7 @@ router.post(
       jwt.sign(
         payload,
         config.get("SECRET_KEY"),
-        { expiresIn: 360000 },
+        { expiresIn: "1h" },
         (err, token) => {
           if (err) {
             throw err;

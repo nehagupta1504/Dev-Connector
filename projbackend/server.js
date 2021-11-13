@@ -12,7 +12,7 @@ connectDB();
 
 //Init Middlewares
 app.use(express.json({ extended: false })); //extended false to get the body in any type if true means will get only array or string
-
+app.use(express.urlencoded({ extended: false }));
 //Define Routes
 app.use("/api/users", user);
 app.use("/api/auth", auth);
