@@ -10,6 +10,10 @@ const PostSchema = Schema({
     type: String,
     required: true,
   },
+  posttitle: {
+    type: String,
+    required: true,
+  },
   name: {
     type: String,
   },
