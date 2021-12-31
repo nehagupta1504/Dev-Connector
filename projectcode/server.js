@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const connectDB = require("./config/db");
 const user = require("./routes/api/users");
 const profile = require("./routes/api/profile");
@@ -13,6 +14,7 @@ connectDB();
 //Init Middlewares
 app.use(express.json({ extended: false })); //extended false to get the body in any type if true means will get only array or string
 app.use(express.urlencoded({ extended: false }));
+app.use(cors());
 //Define Routes
 app.use("/api/users", user);
 app.use("/api/auth", auth);
