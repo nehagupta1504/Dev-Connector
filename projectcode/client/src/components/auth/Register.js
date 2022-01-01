@@ -2,8 +2,9 @@ import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { setAlert } from "../../actions/alert";
+import { register } from "../../actions/api_auth";
 import PropTypes from "prop-types";
-const Register = ({ setAlert }) => {
+const Register = ({ setAlert, register }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -18,7 +19,7 @@ const Register = ({ setAlert }) => {
     if (password !== password2) {
       setAlert("Passwords don't match", "danger");
     } else {
-      console.log("success");
+      register({ name, email, password });
     }
   };
   return (
@@ -43,6 +44,7 @@ const Register = ({ setAlert }) => {
             type="email"
             placeholder="Email Address"
             name="email"
+            required
             value={email}
             onChange={(e) => onChange(e)}
           />
@@ -82,6 +84,7 @@ const Register = ({ setAlert }) => {
 
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
 };
 // connect(state want to map, object with any action we want to use)
-export default connect(null, { setAlert })(Register);
+export default connect(null, { setAlert, register })(Register);

@@ -10,7 +10,6 @@ const Alert = ({ alerts }) => {
           return (
             <div key={alert.id} className={`alert alert-${alert.alertType}`}>
               {alert.msg}
-              {console.log("Hello")}
             </div>
           );
         })}

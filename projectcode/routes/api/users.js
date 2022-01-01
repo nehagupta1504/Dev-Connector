@@ -17,15 +17,17 @@ router.post(
     check("email", "Please include a valid email").isEmail(),
     check(
       "password",
-      "Please enter a password at least 8 character and contain At least one uppercase.At least one lower case.At least one special character. "
-    )
-      .isLength({ min: 8 })
-      .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\d@$.!%*#?&]/),
+      "Please enter a password at least 8 character  "
+    ).isLength({ min: 8 }),
+    check(
+      "password",
+      "Please enter a password containing At least one uppercase.At least one lower case.At least one special character. "
+    ).matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\d@$.!%*#?&]/),
   ],
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json(errors.array());
+      return res.status(400).json({ errors: errors.array() });
     }
     const { name, email, password } = req.body;
     try {
