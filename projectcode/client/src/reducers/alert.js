@@ -1,5 +1,6 @@
 import { SET_ALERT, REMOVE_ALERT } from "../actions/constants";
 const intialState = [];
+// eslint-disable-next-line import/no-anonymous-default-export
 export default function (state = intialState, action) {
   const { type, payload } = action;
   switch (type) {

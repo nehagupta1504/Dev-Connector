@@ -1,6 +1,10 @@
 // file to verify the token
-import { Switch } from "react-router-dom";
-import { REGISTER_SUCCESS, REGISTER_FAIL } from "../actions/constants";
+import {
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
+  USER_LOADED,
+  AUTH_ERROR,
+} from "../actions/constants";
 
 const initalState = {
   token: localStorage.getItem("token"),
@@ -9,9 +13,17 @@ const initalState = {
   user: null,
 };
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default function (state = initalState, action) {
   const { type, payload } = action;
   switch (type) {
+    case USER_LOADED:
+      return {
+        ...state,
+        isAuthenticated: true,
+        loading: false,
+        user: payload,
+      };
     case REGISTER_SUCCESS:
       localStorage.setItem("token", payload.token);
       return {
@@ -21,6 +33,7 @@ export default function (state = initalState, action) {
         loading: false,
       };
     case REGISTER_FAIL:
+    case AUTH_ERROR:
       localStorage.removeItem("token");
       return {
         ...state,
@@ -28,6 +41,7 @@ export default function (state = initalState, action) {
         isAuthenticated: false,
         loading: false,
       };
+
     default:
       return state;
   }
