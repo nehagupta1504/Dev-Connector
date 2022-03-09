@@ -16,6 +16,7 @@ import { loadUser } from "./actions/api_auth";
 // Redux
 import { Provider } from "react-redux";
 import store from "./store";
+import Dashboard from "./components/dashboard/Dashboard";
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
@@ -30,9 +31,9 @@ const App = () => {
           <Navbar />
           <section className="container">
             <Alert />
+
             <Routes>
               <Route exact path="/" element={<Landing />} />
-
               <Route exact path="/register" element={<Register />} />
               <Route
                 exact
@@ -43,6 +44,7 @@ const App = () => {
                   </section>
                 }
               />
+              <Route exact path="/dashboard" element={<Dashboard />} />
             </Routes>
           </section>
         </Fragment>
