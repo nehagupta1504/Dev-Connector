@@ -1,27 +1,41 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Navigate } from "react-router-dom";
-
-const Dashboard = ({ auth: { isAuthenticated, loading } }) => {
+import { getCurrentProfile } from "../../actions/profile";
+const Dashboard = ({
+  auth: { isAuthenticated, loading },
+  getCurrentProfile,
+}) => {
   return (
     <div>
       {!isAuthenticated && !loading ? (
         <Navigate replace="true" to="/login" />
       ) : (
-        <span>dashboard</span>
+        <Profile props={{ isAuthenticated, loading, getCurrentProfile }} />
       )}
     </div>
   );
 };
+const Profile = ({
+  props: { isAuthenticated, loading, getCurrentProfile },
+}) => {
+  useEffect(() => {
+    getCurrentProfile();
+  }, []);
+  return <>dashboard;</>;
+};
 
 Dashboard.propTypes = {
-  isAuthenticated: PropTypes.bool,
+  auth: PropTypes.object.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired,
 };
 
 // to get the auth state to redirect
 const mapStateToProps = (state) => ({
   auth: state.auth,
+  profile: state.profile,
 });
 
-export default connect(mapStateToProps)(Dashboard);
+export default connect(mapStateToProps, { getCurrentProfile })(Dashboard);

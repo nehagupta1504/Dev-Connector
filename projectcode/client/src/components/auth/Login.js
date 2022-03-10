@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { login } from "../../actions/api_auth";
+import { login } from "../../actions/auth";
 import { Navigate } from "react-router-dom";
 // since is Authenticated and login are proptypes so adding them here
 const Login = ({ login, isAuthenticated }) => {

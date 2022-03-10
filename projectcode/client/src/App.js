@@ -12,7 +12,7 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Alert from "./components/layouts/alert";
 import setAuthToken from "./utils/setAuthToken";
-import { loadUser } from "./actions/api_auth";
+import { loadUser } from "./actions/auth";
 // Redux
 import { Provider } from "react-redux";
 import store from "./store";
