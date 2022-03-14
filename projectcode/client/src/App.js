@@ -17,6 +17,7 @@ import { loadUser } from "./actions/auth";
 import { Provider } from "react-redux";
 import store from "./store";
 import Dashboard from "./components/dashboard/Dashboard";
+import CreateProfile from "./components/profile-forms/CreateProfile";
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
@@ -45,6 +46,7 @@ const App = () => {
                 }
               />
               <Route exact path="/dashboard" element={<Dashboard />} />
+              <Route exact path="/create-profile" element={<CreateProfile />} />
             </Routes>
           </section>
         </Fragment>
