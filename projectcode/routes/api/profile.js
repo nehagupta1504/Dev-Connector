@@ -59,7 +59,6 @@ router.post(
     } = req.body;
     // Build profile object
     const profileFields = {};
-
     profileFields.user = req.user.id;
     if (company) profileFields.company = company;
     if (website) profileFields.website = website;
@@ -86,11 +85,14 @@ router.post(
           { $set: profileFields },
           { new: true }
         );
+        console.log(profile.skills);
         return res.json(profile);
       }
       // Create
       profile = new Profile(profileFields);
+
       await profile.save();
+      profile.skills = profile.skills.toString();
       res.status(201).json(profile);
     } catch (err) {
       console.error(err.message);
