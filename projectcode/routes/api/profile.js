@@ -66,8 +66,12 @@ router.post(
     if (bio) profileFields.bio = bio;
     if (status) profileFields.status = status;
     if (githubusername) profileFields.githubusername = githubusername;
-    if (skills) {
-      profileFields.skills = skills.split(",").map((skill) => skill.trim());
+    const skillsString = skills.toString();
+    if (skillsString) {
+      profileFields.skills = skillsString
+        .split(",")
+        .map((skill) => skill.trim())
+        .filter((skill) => skill != "");
     }
     // Build Social Object
     profileFields.social = {};
@@ -85,7 +89,6 @@ router.post(
           { $set: profileFields },
           { new: true }
         );
-        console.log(profile.skills);
         return res.json(profile);
       }
       // Create
@@ -188,6 +191,7 @@ router.put(
       const profile = await Profile.findOne({ user: req.user.id });
       profile.experience.unshift(newExp); //to put latest experience on starting
       await profile.save();
+      console.log(profile);
       res.json(profile);
     } catch (err) {
       console.error(err.message);
@@ -238,7 +242,6 @@ router.put(
     ],
   ],
   async (req, res) => {
-    console.log(req.body, "heelo");
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ error: errors.array() });
