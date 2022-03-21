@@ -297,6 +297,9 @@ button {
 .table th {
   background: var(--light-color);
 }
+.table {
+  width: 100%;
+}
 
 /* Navbar */
 .navbar {

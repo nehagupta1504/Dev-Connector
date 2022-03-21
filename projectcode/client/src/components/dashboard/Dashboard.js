@@ -6,6 +6,8 @@ import { getCurrentProfile } from "../../actions/profile";
 import PrivateRoute from "../layouts/PrivateRoute";
 import Spinner from "../layouts/spinner";
 import DashboardActions from "./DashboardActions";
+import Education from "./Education";
+import Experience from "./Experience";
 const Dashboard = ({ getCurrentProfile, profile }) => {
   return (
     <PrivateRoute>
@@ -35,6 +37,8 @@ const Profile = ({
       {profile !== null ? (
         <>
           <DashboardActions />
+          <Experience experience={profile.experience} />
+          <Education education={profile.education} />
         </>
       ) : (
         <>
