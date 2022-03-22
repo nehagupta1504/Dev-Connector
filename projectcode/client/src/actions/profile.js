@@ -8,6 +8,8 @@ import {
   PROFILE_ERROR,
   UPDATE_PROFILE,
   ACCOUNT_DELETED,
+  GET_PROFILES,
+  GET_REPOS,
 } from "./constants";
 
 // Get current users profile
@@ -16,6 +18,67 @@ export const getCurrentProfile = () => async (dispatch) => {
     const res = await axios.get("/api/profile/me");
     dispatch({
       type: GET_PROFILE,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: {
+        msg: err.response.statustext,
+        status: err.response.status,
+      },
+    });
+  }
+};
+
+// Get all profiles
+export const getProfiles = () => async (dispatch) => {
+  // Why this added? dispatch clear_profile
+  dispatch({
+    type: CLEAR_PROFILE,
+  });
+  try {
+    const res = await axios.get("/api/profile");
+    dispatch({
+      type: GET_PROFILES,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: {
+        msg: err.response.statustext,
+        status: err.response.status,
+      },
+    });
+  }
+};
+
+// Get all profiles by ID
+export const getProfileById = (userId) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/profile/user/${userId}`);
+    dispatch({
+      type: GET_PROFILE,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: {
+        msg: err.response.statustext,
+        status: err.response.status,
+      },
+    });
+  }
+};
+
+// Get Github Repos
+export const getGithubRepos = (username) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/profile/github/${username}`);
+    dispatch({
+      type: GET_REPOS,
       payload: res.data,
     });
   } catch (err) {
@@ -172,24 +235,24 @@ export const deleteEducation = (eduId) => async (dispatch) => {
 // to delete an account
 export const deleteAccount = () => async (dispatch) => {
   console.log("In delete account");
-  // if (window.confirm("Are you sure? This can't be undone")) {
-  //   try {
-  //     const res = await axios.delete(`/api/profile`);
-  //     dispatch({
-  //       type: CLEAR_PROFILE,
-  //     });
-  //     dispatch({
-  //       type: ACCOUNT_DELETED,
-  //     });
-  //     dispatch(setAlert("Your account has been permenantly deleted"));
-  //   } catch (err) {
-  //     dispatch({
-  //       type: PROFILE_ERROR,
-  //       payload: {
-  //         msg: err.response.statustext,
-  //         status: err.response.status,
-  //       },
-  //     });
-  //   }
-  // }
+  if (window.confirm("Are you sure? This can't be undone")) {
+    try {
+      const res = await axios.delete("/api/profile");
+      dispatch({
+        type: CLEAR_PROFILE,
+      });
+      dispatch({
+        type: ACCOUNT_DELETED,
+      });
+      dispatch(setAlert("Your account has been permenantly deleted"));
+    } catch (err) {
+      dispatch({
+        type: PROFILE_ERROR,
+        payload: {
+          msg: err.response.statustext,
+          status: err.response.status,
+        },
+      });
+    }
+  }
 };

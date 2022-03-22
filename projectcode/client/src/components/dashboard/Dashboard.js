@@ -11,7 +11,7 @@ import Experience from "./Experience";
 const Dashboard = ({ profile, getCurrentProfile, deleteAccount }) => {
   return (
     <PrivateRoute>
-      <Profile props={{ getCurrentProfile, profile }} />
+      <Profile props={{ getCurrentProfile, deleteAccount, profile }} />
     </PrivateRoute>
   );
 };
@@ -20,6 +20,7 @@ const Profile = ({
     isAuthenticated,
     user,
     getCurrentProfile,
+    deleteAccount,
     profile: { loading, profile },
   },
 }) => {
