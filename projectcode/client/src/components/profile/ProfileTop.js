@@ -7,7 +7,7 @@ const ProfileTop = ({
     company,
     location,
     website,
-    social: { youtube, twitter, facebook, linkedin, instagram },
+    social,
     user: { name, avatar },
   },
 }) => {
@@ -28,28 +28,28 @@ const ProfileTop = ({
             <i className="fas fa-globe fa-2x"></i>
           </a>
         )}
-        {twitter && (
-          <a href={twitter}>
+        {social && social.twitter && (
+          <a href={social.twitter}>
             <i className="fab fa-twitter fa-2x"></i>
           </a>
         )}
-        {facebook && (
-          <a href={facebook}>
+        {social && social.facebook && (
+          <a href={social.facebook}>
             <i className="fab fa-facebook fa-2x"></i>
           </a>
         )}
-        {instagram && (
-          <a href={instagram}>
+        {social && social.instagram && (
+          <a href={social.instagram}>
             <i className="fab fa-instagram fa-2x"></i>
           </a>
         )}
-        {linkedin && (
-          <a href={linkedin}>
+        {social && social.linkedin && (
+          <a href={social.linkedin}>
             <i className="fab fa-linkedin fa-2x"></i>
           </a>
         )}
-        {youtube && (
-          <a href={youtube}>
+        {social && social.youtube && (
+          <a href={social.youtube}>
             <i className="fab fa-youtube fa-2x"></i>
           </a>
         )}

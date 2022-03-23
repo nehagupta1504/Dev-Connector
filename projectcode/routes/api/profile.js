@@ -84,6 +84,7 @@ router.post(
     if (instagram) profileFields.social.instagram = instagram;
     try {
       let profile = await Profile.findOne({ user: req.user.id });
+      console.log("Profile exists", profile);
       if (profile) {
         // Update
         profile = await Profile.findOneAndUpdate(
