@@ -4,11 +4,12 @@ import { connect } from "react-redux";
 import Spinner from "../layouts/spinner";
 import { getProfileById } from "../../actions/profile";
 import { useParams, Link } from "react-router-dom";
+import ProfileTop from "./ProfileTop";
+import ProfileAbout from "./ProfileAbout";
 const Profile = ({ auth, profile: { profile, loading }, getProfileById }) => {
   const { id } = useParams();
   useEffect(() => {
     // To get the id of the page which we are having in url
-    console.log(id);
     getProfileById(id);
   }, [id, getProfileById]);
   return (
@@ -27,6 +28,10 @@ const Profile = ({ auth, profile: { profile, loading }, getProfileById }) => {
                 Edit Profile
               </Link>
             )}
+          <div className="profile-grid my-1">
+            <ProfileTop profile={profile} />
+            <ProfileAbout profile={profile} />
+          </div>
         </>
       )}
     </>
