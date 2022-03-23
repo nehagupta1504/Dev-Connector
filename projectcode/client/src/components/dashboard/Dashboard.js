@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { Navigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getCurrentProfile, deleteAccount } from "../../actions/profile";
 import PrivateRoute from "../layouts/PrivateRoute";
 import Spinner from "../layouts/spinner";
@@ -26,7 +26,7 @@ const Profile = ({
 }) => {
   useEffect(() => {
     getCurrentProfile();
-  }, []);
+  }, [getCurrentProfile]);
   return loading && profile === null ? (
     <Spinner />
   ) : (

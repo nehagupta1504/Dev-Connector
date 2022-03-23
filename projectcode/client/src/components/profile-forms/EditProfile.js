@@ -57,7 +57,7 @@ function EditProfile({
         instagram: !profile.instagram ? "" : profile.instagram,
       });
     console.log(skills);
-  }, [loading]);
+  }, [loading, getCurrentProfile]);
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };

@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Navigate } from "react-router-dom";
 const PrivateRoute = ({ auth: { loading, isAuthenticated }, children }) => {
@@ -10,7 +9,6 @@ const PrivateRoute = ({ auth: { loading, isAuthenticated }, children }) => {
   );
 };
 
-PrivateRoute.propTypes = {};
 const mapStateToProps = (state) => {
   return {
     auth: state.auth,

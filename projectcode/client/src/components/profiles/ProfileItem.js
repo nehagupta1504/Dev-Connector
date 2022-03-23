@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 
 const ProfileItem = ({
   profile: {
@@ -11,7 +10,6 @@ const ProfileItem = ({
     skills,
   },
 }) => {
-  console.log("calling profile items");
   return (
     <>
       <div className="profile bg-light">
@@ -39,7 +37,5 @@ const ProfileItem = ({
     </>
   );
 };
-
-ProfileItem.propTypes = {};
 
 export default ProfileItem;
