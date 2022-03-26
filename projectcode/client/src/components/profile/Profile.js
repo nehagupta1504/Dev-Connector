@@ -6,6 +6,10 @@ import { getProfileById } from "../../actions/profile";
 import { useParams, Link } from "react-router-dom";
 import ProfileTop from "./ProfileTop";
 import ProfileAbout from "./ProfileAbout";
+import ProfileExperience from "./ProfileExperience";
+import ProfileEducation from "./ProfileEducation";
+import ProfileGithub from "./ProfileGithub";
+
 const Profile = ({ auth, profile: { profile, loading }, getProfileById }) => {
   const { id } = useParams();
   useEffect(() => {
@@ -31,6 +35,43 @@ const Profile = ({ auth, profile: { profile, loading }, getProfileById }) => {
           <div className="profile-grid my-1">
             <ProfileTop profile={profile} />
             <ProfileAbout profile={profile} />
+            <div className="profile-exp bg-white p-2">
+              <h2 className="text-primary">Experiences</h2>
+              {profile.experience.length > 0 ? (
+                <>
+                  {profile.experience.map((experience) => {
+                    return (
+                      <ProfileExperience
+                        key={experience._id}
+                        experience={experience}
+                      />
+                    );
+                  })}
+                </>
+              ) : (
+                <h4>No experience Credential</h4>
+              )}
+            </div>
+            <div className="profile-edu bg-white p-2">
+              <h2 className="text-primary">Education</h2>
+              {profile.education.length > 0 ? (
+                <>
+                  {profile.education.map((education) => {
+                    return (
+                      <ProfileEducation
+                        key={education._id}
+                        education={education}
+                      />
+                    );
+                  })}
+                </>
+              ) : (
+                <h4>No education Credential</h4>
+              )}
+            </div>
+            {profile.githubusername && (
+              <ProfileGithub username={profile.githubusername} />
+            )}
           </div>
         </>
       )}

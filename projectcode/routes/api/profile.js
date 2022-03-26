@@ -3,10 +3,9 @@ const router = express.Router();
 const User = require("../../models/User");
 const Profile = require("../../models/Profile");
 const Post = require("../../models/Post");
-
+const https = require("https");
 const auth = require("../../middlewares/auth");
 const { check, validationResult } = require("express-validator");
-const request = require("request");
 
 // @route   GET api/profile/me
 // @desc    Get current user profile
@@ -299,7 +298,28 @@ router.delete("/education/:edu_id", auth, async (req, res) => {
 // @desc    getting github repos using github username
 // @access  Private
 router.get("/github/:username", async (req, res) => {
-  // @todo - 23
+  const username = req.params.username;
+  var options = {
+    host: "api.github.com",
+    path: "/users/" + username + "/repos",
+    method: "GET",
+    headers: { "user-agent": "node.js" },
+  };
+
+  const request = https.get(options, (response) => {
+    let body = "";
+    response.on("data", (data) => {
+      body += data;
+    });
+    response.on("end", () => {
+      let gitData = JSON.parse(body);
+      res.status(200).send(gitData);
+    });
+    request.on("error", (err) => {
+      console.log("prblm with requests", err.message);
+      res.status(400).send({ msg: err.message });
+    });
+  });
 });
 
 module.exports = router;
