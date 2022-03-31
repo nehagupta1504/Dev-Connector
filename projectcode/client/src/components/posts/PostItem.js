@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { addLike, removeLike, deletePost } from "../../actions/post";
 const PostItem = ({
   auth,
-  post: { _id, text, name, avatar, user, likes, comments, date },
+  post: { _id, text, posttitle, name, avatar, user, likes, comments, date },
   addLike,
   removeLike,
   deletePost,
@@ -21,6 +21,7 @@ const PostItem = ({
           </a>
         </div>
         <div>
+          <h3 className="my-1">{posttitle}</h3>
           <p className="my-1">{text}</p>
           <p className="post-date">
             {" "}
