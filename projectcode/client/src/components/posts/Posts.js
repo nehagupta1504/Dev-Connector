@@ -5,6 +5,7 @@ import { getPosts } from "../../actions/post";
 import Spinner from "../layouts/spinner";
 import PrivateRoute from "../layouts/PrivateRoute";
 import PostItem from "./PostItem";
+import PostForm from "./PostForm";
 const Posts = ({ post: { posts, loading }, getPosts }) => {
   useEffect(() => {
     getPosts();
@@ -19,7 +20,7 @@ const Posts = ({ post: { posts, loading }, getPosts }) => {
           <p className="lead">
             <i className="fas fa-user"></i> Welcome to the community
           </p>
-          {/* Post Form */}
+          <PostForm />
           <div className="posts">
             {posts.map((post) => {
               return <PostItem key={post._id} post={post} />;

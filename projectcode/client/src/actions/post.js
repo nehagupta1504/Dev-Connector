@@ -1,4 +1,10 @@
-import { DELETE_POST, GET_POSTS, POST_ERROR, UPDATE_LIKES } from "./constants";
+import {
+  DELETE_POST,
+  ADD_POST,
+  GET_POSTS,
+  POST_ERROR,
+  UPDATE_LIKES,
+} from "./constants";
 import { setAlert } from "./alert";
 import axios from "axios";
 
@@ -59,6 +65,29 @@ export const deletePost = (id) => async (dispatch) => {
       payload: { id },
     });
     dispatch(setAlert("Post removed", "success"));
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+// add post
+export const addPost = (formData) => async (dispatch) => {
+  console.log("addPost", formData);
+  try {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const res = await axios.post(`/api/posts`, formData, config);
+    dispatch({
+      type: ADD_POST,
+      payload: res.data,
+    });
+    dispatch(setAlert("Post Added", "success"));
   } catch (err) {
     dispatch({
       type: POST_ERROR,
