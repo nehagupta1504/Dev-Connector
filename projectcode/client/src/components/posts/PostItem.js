@@ -15,10 +15,10 @@ const PostItem = ({
     <>
       <div className="post bg-white my-1 p-1">
         <div>
-          <a href="profile.html">
+          <Link to={`/profile/${user}`}>
             <img src={avatar} alt="" className="round-img" />
             <h4>{name}</h4>
-          </a>
+          </Link>
         </div>
         <div>
           <h3 className="my-1">{posttitle}</h3>
