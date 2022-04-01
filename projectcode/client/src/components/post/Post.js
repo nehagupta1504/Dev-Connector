@@ -6,6 +6,7 @@ import { getPost } from "../../actions/post";
 import PrivateRoute from "../layouts/PrivateRoute";
 import { useParams, Link } from "react-router-dom";
 import PostItem from "../posts/PostItem";
+import CommentForm from "./CommentForm";
 const Post = ({ post: { post, loading }, getPost }) => {
   const { id } = useParams();
   console.log(id);
@@ -22,6 +23,7 @@ const Post = ({ post: { post, loading }, getPost }) => {
             Back to Post
           </Link>
           <PostItem post={post} showActions={false} />
+          <CommentForm postId={id} />
         </>
       )}
     </PrivateRoute>

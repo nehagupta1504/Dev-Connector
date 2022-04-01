@@ -1,9 +1,11 @@
 import {
+  ADD_COMMENT,
   ADD_POST,
   DELETE_POST,
   GET_POST,
   GET_POSTS,
   POST_ERROR,
+  REMOVE_COMMENT,
   UPDATE_LIKES,
 } from "../actions/constants";
 const initialState = {
@@ -60,7 +62,21 @@ export default function (state = initialState, action) {
         error: payload,
         loading: false,
       };
-
+    case ADD_COMMENT:
+      return {
+        ...state,
+        post: { ...state.post, comments: payload },
+        loading: false,
+      };
+    case REMOVE_COMMENT:
+      return {
+        ...state,
+        post: {
+          ...state.post,
+          comments: state.post.comments((comment) => comment._id !== payload),
+        },
+        loading: false,
+      };
     default:
       return {
         ...state,

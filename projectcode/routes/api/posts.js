@@ -165,8 +165,6 @@ router.post(
     [check("text", "Some content is required to comment").not().isEmpty()],
   ],
   async (req, res) => {
-    console.log("hiiting ");
-
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ erros: errors.array() });
