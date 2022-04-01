@@ -197,7 +197,6 @@ router.post(
 // @desc   Delete comment
 // @access Private
 router.delete("/comment/:id/:comment_id", auth, async (req, res) => {
-  console.log("hiiting delete");
   try {
     const post = await Post.findById(req.params.id);
 

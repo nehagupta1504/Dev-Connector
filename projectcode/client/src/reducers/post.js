@@ -18,7 +18,7 @@ const initialState = {
 // eslint-disable-next-line import/no-anonymous-default-export
 export default function (state = initialState, action) {
   const { type, payload } = action;
-
+  console.log(payload);
   switch (type) {
     case GET_POSTS:
       return {
@@ -73,7 +73,10 @@ export default function (state = initialState, action) {
         ...state,
         post: {
           ...state.post,
-          comments: state.post.comments((comment) => comment._id !== payload),
+          comments: state.post.comments.filter((comment) => {
+            console.log("commentid ", comment._id, "payload", payload);
+            return comment._id !== payload;
+          }),
         },
         loading: false,
       };

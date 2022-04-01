@@ -7,9 +7,9 @@ import PrivateRoute from "../layouts/PrivateRoute";
 import { useParams, Link } from "react-router-dom";
 import PostItem from "../posts/PostItem";
 import CommentForm from "./CommentForm";
+import CommentItem from "./CommentItem";
 const Post = ({ post: { post, loading }, getPost }) => {
   const { id } = useParams();
-  console.log(id);
   useEffect(() => {
     getPost(id);
   }, [getPost, id]);
@@ -24,6 +24,13 @@ const Post = ({ post: { post, loading }, getPost }) => {
           </Link>
           <PostItem post={post} showActions={false} />
           <CommentForm postId={id} />
+          <div className="comments">
+            {post.comments.map((comment) => {
+              return (
+                <CommentItem key={comment._id} comment={comment} postId={id} />
+              );
+            })}
+          </div>
         </>
       )}
     </PrivateRoute>
@@ -33,7 +40,7 @@ const Post = ({ post: { post, loading }, getPost }) => {
 Post.propTypes = {
   getPost: PropTypes.func.isRequired,
 };
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
     post: state.post,
   };
