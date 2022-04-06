@@ -32,36 +32,122 @@ const App = () => {
       <Router>
         <Fragment>
           <Navbar />
-          <section className="container">
-            <Alert />
+          {/* <section className="container"> */}
+          <Alert />
 
-            <Routes>
-              <Route exact path="/" element={<Landing />} />
-              <Route exact path="/register" element={<Register />} />
-              <Route
-                exact
-                path="/login"
-                element={
-                  <section>
-                    <Login />
-                  </section>
-                }
-              />
-              <Route exact path="/dashboard" element={<Dashboard />} />
-              <Route exact path="/create-profile" element={<CreateProfile />} />
-              <Route exact path="/edit-profile" element={<EditProfile />} />
-              <Route exact path="/add-experience" element={<AddExperience />} />
-              <Route exact path="/add-education" element={<AddEducation />} />
-              <Route exact path="/profiles" element={<Profiles />} />
-              <Route exact path="/profile/:id" element={<Profile />} />
-              <Route exact path="/posts" element={<Posts />} />
-              <Route exact path="/posts/:id" element={<Post />} />
-            </Routes>
-          </section>
+          <Routes>
+            <Route exact path="/" element={<Landing />} />
+            <Route
+              exact
+              path="/register"
+              element={
+                <Container>
+                  {" "}
+                  <Register />
+                </Container>
+              }
+            />
+            <Route
+              exact
+              path="/login"
+              element={
+                <Container>
+                  <Login />
+                </Container>
+              }
+            />
+            <Route
+              exact
+              path="/dashboard"
+              element={
+                <Container>
+                  <Dashboard />
+                </Container>
+              }
+            />
+            <Route
+              exact
+              path="/create-profile"
+              element={
+                <Container>
+                  {" "}
+                  <CreateProfile />
+                </Container>
+              }
+            />
+            <Route
+              exact
+              path="/edit-profile"
+              element={
+                <Container>
+                  <EditProfile />
+                </Container>
+              }
+            />
+            <Route
+              exact
+              path="/add-experience"
+              element={
+                <Container>
+                  <AddExperience />
+                </Container>
+              }
+            />
+            <Route
+              exact
+              path="/add-education"
+              element={
+                <Container>
+                  <AddEducation />
+                </Container>
+              }
+            />
+            <Route
+              exact
+              path="/profiles"
+              element={
+                <Container>
+                  <Profiles />
+                </Container>
+              }
+            />
+            <Route
+              exact
+              path="/profile/:id"
+              element={
+                <Container>
+                  <Profile />
+                </Container>
+              }
+            />
+            <Route
+              exact
+              path="/posts"
+              element={
+                <Container>
+                  <Posts />
+                </Container>
+              }
+            />
+            <Route
+              exact
+              path="/posts/:id"
+              element={
+                <Container>
+                  <Post />
+                </Container>
+              }
+            />
+          </Routes>
+          {/* </section> */}
         </Fragment>
       </Router>
     </Provider>
   );
+};
+
+const Container = ({ children }) => {
+  return <section className="container">{children}</section>;
 };
 
 export default App;

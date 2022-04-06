@@ -150,7 +150,7 @@ img {
 
 .alert {
   padding: 0.8rem;
-  margin: 1rem 0;
+  margin: 4rem 10rem 0rem 10rem;
   opacity: 0.9;
   background: var(--light-color);
   color: #333;
@@ -581,4 +581,9 @@ button {
 
 a {
   cursor: pointer;
+}
+
+.table th,
+.table td .btn {
+  text-align: center;
 }
